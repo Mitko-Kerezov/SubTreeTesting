@@ -32,7 +32,8 @@ var AppViewModel = (function (_super) {
                 this._redditItems = new virtualArray.VirtualArray(1000);
                 this._redditItems.loadSize = 50;
                 this._redditItems.on(virtualArray.VirtualArray.itemsLoadingEvent, function (args) {
-                    http.getJSON(redditUrl + args.count + (after ? "&after=" + after : "")).then(function (result) {
+                    http.getJSON(redditUrl + args.count +
+                        (after ? "&after=" + after : "")).then(function (result) {
                         var itemsToLoad = result.data.children.map(function (i) {
                             return new redditViewModel.RedditViewModel(i.data);
                         });
@@ -41,12 +42,9 @@ var AppViewModel = (function (_super) {
                         if (lastItem) {
                             after = itemsToLoad[itemsToLoad.length - 1].source.name;
                         }
-                    }, function (e) {
-                        console.log(e.message);
-                    }).catch(function (e) {
-                        setTimeout(function () {
-                            throw e;
-                        });
+                    }, function (e) { console.log(e.message); })
+                        .catch(function (e) {
+                        setTimeout(function () { throw e; });
                     });
                     ;
                 });

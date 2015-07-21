@@ -1,0 +1,11 @@
+*/bin
+*/obj
+*.user-settings.xml
+
+# NativeScript files
+.tnsproject
+
+# Cuteness files
+nativescript-sample-cuteness/README.md
+nativescript-sample-cuteness/run.bat
+nativescript-sample-cuteness/run.sh
